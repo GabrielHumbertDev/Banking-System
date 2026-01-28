@@ -1,17 +1,129 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- ============================= -->
+    <!-- Maven Project Coordinates     -->
+    <!-- ============================= -->
+    <!-- These identify your project uniquely -->
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.gabrielhumbertdev</groupId>
-    <artifactId>Banking-System</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com.fdmgroup.epic3</groupId>
+    <artifactId>epic3-transformation-deposit-boxlet</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
+    <!-- ============================= -->
+    <!-- Project-wide Properties       -->
+    <!-- ============================= -->
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <!-- Java version (FDM standard = Java 8) -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- Testing library versions -->
+        <junit.jupiter.version>5.7.0</junit.jupiter.version>
+        <mockito.version>3.12.4</mockito.version>
+
+        <!-- Ensure consistent encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <!-- ============================= -->
+    <!-- Dependencies                 -->
+    <!-- ============================= -->
+    <dependencies>
+
+        <!-- JUnit 5: core testing framework -->
+        <!-- Provides @Test, assertions, and test engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit 5 Parameterized Tests -->
+        <!-- Required for @ParameterizedTest and @MethodSource -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito Core -->
+        <!-- Used for mocking DAOs and verifying interactions -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito Inline -->
+        <!-- Enables static mocking (mockStatic) for EmailUtil.sendEmail(...) -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito JUnit Jupiter Integration -->
+        <!-- Allows @ExtendWith(MockitoExtension.class) with JUnit 5 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Jakarta Mail API -->
+        <!-- Provides email sending capabilities (interfaces) -->
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
+        <!-- Jakarta Mail Implementation -->
+        <!-- Concrete SMTP implementation used at runtime -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ============================= -->
+    <!-- Build Configuration          -->
+    <!-- ============================= -->
+    <build>
+        <plugins>
+
+            <!-- Maven Surefire Plugin -->
+            <!-- Responsible for running unit tests -->
+            <!-- Required for JUnit 5 to work correctly -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+
+            <!-- Maven Compiler Plugin -->
+            <!-- Ensures Java source/target compatibility -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
